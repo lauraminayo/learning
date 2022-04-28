@@ -20,7 +20,7 @@
     <!--Navbar here-->
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a clss="navbar-brand" href="#">Laura's Market</a>
+        <a class="navbar-brand" href="#">Laura's Market</a>
         <button class="navbar-toggler" type="button" data toggle="collapse" data-target="#navbarNav">
             <span class="navbar-toggle-icon"></span>
         </button>
@@ -45,19 +45,13 @@
 
         </div>
     </nav>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-          {% for category, message in messages %}
-          <div class="alert alert-{{ category }}">
-              <button type="button" class="m1-2 mb-1 close" data-dismiss="alert" aria-label="Close">
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">
+        <button class="close" aria-label="Close" type="button" data-dismiss="alert" data-close>
                   <span aria-hidden="true">&times;</span>
-              </button>
-              {{ message }}
-          </div>
-          {% endfor %}
-        {% endif %}
-    {% endwith %}
-    {% block content%} {% endblock %}
+              </button> {{message}}
+    </div>
+    {% endfor %} {% endif %} {% endwith %} {% block content%} {% endblock %}
     <!--Future Content Here-->
 
 
