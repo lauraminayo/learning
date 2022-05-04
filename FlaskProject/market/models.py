@@ -22,9 +22,11 @@ class User(db.Model, UserMixin):
      @password.setter
      def password(self, plain_text_password):
         self.password_hash = bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
+        
 
      def check_password_correction(self, attempted_password):
          return bcrypt.check_password_hash(self.password_hash, attempted_password)
+         
                     
 class Item(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
@@ -34,6 +36,6 @@ class Item(db.Model):
     description = db.Column(db.String(length = 1024), nullable=False, unique=True)
     owner = db.Column(db.Integer(), db.ForeignKey('user.id'))
 
-    
+
     def __repr__(self):
         return f'Item {self.name}'
