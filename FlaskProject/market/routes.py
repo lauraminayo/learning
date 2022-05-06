@@ -2,7 +2,7 @@ from unicodedata import category
 from market import app
 from flask import render_template, redirect, url_for, flash
 from market.models import Item, User
-from market.forms import RegisterForm, LoginForm
+from market.forms import RegisterForm, LoginForm, PurchaseItemForm
 from market import db
 from flask_login import login_user, logout_user, login_required
 
@@ -11,11 +11,14 @@ from flask_login import login_user, logout_user, login_required
 def home_page():
     return render_template("index.html")
 
-@app.route('/market')
+@app.route('/market', methods=['GET', 'POST'])
 @login_required
 def market_page():
+    purchase_form=PurchaseItemForm()
+    if purchase_form.validate_on_submit():
+        print(purchase_form['submit'])
     items = Item.query.all()
-    return render_template("market.html", items=items)
+    return render_template("market.html", items=items, purchase_form=purchase_form)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register_page():
